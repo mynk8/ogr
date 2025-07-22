@@ -26,7 +26,6 @@ class ForgejoReaction(Reaction):
 
 
 class ForgejoComment(Comment):
-    
     def _from_raw_comment(self, raw_comment: _ForgejoComment) -> None:
         self._raw_comment = raw_comment
         self._id = raw_comment.id

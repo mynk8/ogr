@@ -387,7 +387,7 @@ class ForgejoPullRequest(BasePullRequest):
             repo=self.project.repo,
             id=comment_id,
         )
-        return ForgejoPRComment(raw_comment=comment)
+        return ForgejoPRComment(parent=self,raw_comment=comment)
 
     def get_statuses(self) -> Union[list[CommitFlag], Iterable[CommitFlag]]:
         """

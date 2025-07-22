@@ -6,7 +6,7 @@ from typing import Optional
 from urllib.parse import urlparse
 
 from pyforgejo import PyforgejoApi
-
+import os
 from ogr.abstract import GitUser
 from ogr.exceptions import OgrException
 from ogr.factory import use_for_service
@@ -23,12 +23,14 @@ class ForgejoService(BaseGitService):
     def __init__(
         self,
         instance_url: str = "https://codeberg.org",
-        api_key: Optional[str] = None,
+        token: Optional[str] = None,
         **kwargs,
     ):
         super().__init__()
         self.instance_url = instance_url + self.version
-        self._token = f"token {api_key}"
+        if token is None:
+            token = os.getenv("FORGEJO_TOKEN") # TODO: remove this, just for testing for now
+        self._token = f"token {token}"
         self._api = None
 
     @cached_property
